@@ -1,10 +1,8 @@
 from flask import Flask, request,redirect,render_template,url_for,session,jsonify
-
 import mysql.connector
-
 from datetime import timedelta
 
-my_db = mysql.connector.connect(host='localhost',user='root',password='Syamsundar@1234',database='user_data')
+my_db = mysql.connector.connect(host='localhost',user='root',password='<your_password>',database='<your_database_name>')
 my_cursor = my_db.cursor()
 
 
@@ -12,19 +10,20 @@ my_cursor = my_db.cursor()
 
 
 app = Flask(__name__)
-
-
 app.secret_key = "syamsundar"
 app.permanent_session_lifetime = timedelta(hours=1)
-
 @app.route('/',methods=['GET','POST'])
+
+
+#This is Home Section
+
 def home():
     return render_template('home.html')
 
 
 
 
-
+#This section user related section
 
 @app.route('/register',methods=['GET','POST'])
 def register():
@@ -42,8 +41,6 @@ def register():
             my_db.commit()
             return redirect(url_for('login'))    
     return render_template('register.html')
-
-
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -88,6 +85,8 @@ def logout():
   
     return redirect(url_for('login'))
 
+
+#this section is user post section
 
 @app.route('/update/<int:user_id>',methods=['GET','POST'])
 def update(user_id):
@@ -175,8 +174,11 @@ def add_comment():
         my_cursor.execute('insert into comments(post_id,user_id,comment,commenter_name) values(%s,%s,%s,%s)',(post_id,user_id,comment_content,commenter_name))
         my_db.commit()
         return redirect(url_for('all_posts'))
-    
     return redirect(url_for('login'))
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
