@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            max-width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .form-container h2 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 25px;
+            background-color: #f5f5f5;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-input::placeholder {
+            color: #aaa;
+        }
+
+        .form-input:focus {
+            background-color: #e0e0e0;
+        }
+
+        .form-input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 0.2s ease;
+        }
+
+        .form-input[type="submit"]:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .form-input[type="submit"]:active {
+            transform: scale(0.95);
+        }
+
+        .form-input[type="submit"]:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .form-input[type="submit"]:disabled:hover {
+            transform: none;
+        }
+
+        .form-input:focus-within::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #4CAF50;
+            transition: width 0.3s ease;
+        }
+
+        .form-input:focus-within::after {
+            width: 100%;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Update Profile Details</h2>
+        <form id="updateForm" action="/update/{{c['id']}}" method="POST">
+            <input type="email" class="form-input" placeholder="New Email" name="username" value="{{c['username']}}" required>
+            <input type="password" class="form-input" placeholder="New Password" name="password" value="{{c['password']}}" required>
+            <input type="submit" class="form-input" value="Update">
+        </form>
+    </div>
+</body>
+</html>

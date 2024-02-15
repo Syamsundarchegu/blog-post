@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Posts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .post {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .post:hover {
+            transform: translateY(-5px);
+        }
+        .post h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+            line-height: 1.4;
+        }
+        .post p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .post .meta {
+            margin-bottom: 15px;
+        }
+        .category, .status, .date {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-right: 10px;
+        }
+        .category {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .status {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .date {
+            background-color: #ffc107;
+            color: #333;
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+        .actions a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        .actions a:hover {
+            color: #0056b3;
+        }
+        .fa-edit, .fa-trash-alt {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="text-align: center; color: #007bff;">My Posts</h1>
+    {% if current_user_posts %}
+        {% for d in current_user_posts%}
+        <div class="post">
+            <h2>{{ d[1] }}</h2>
+            <p>{{ d[2] }}</p>
+            <div class="meta">
+                <span class="category">{{ d[3] }}</span>
+                <span class="status">{{ d[4] }}</span>
+                <span class="date">{{ d[5] }}</span>
+            </div>
+            <div class="actions">
+                <a href="#"><i class="fas fa-edit"></i> Edit</a>
+                <a href="#"><i class="fas fa-trash-alt"></i> Delete</a>
+            </div>
+        </div>
+    {% endfor %}  
+    {% else %}
+        <p style="text-align: center; color: #666;">No posts found.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
